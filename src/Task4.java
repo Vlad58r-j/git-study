@@ -1,63 +1,42 @@
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Task4 {
     public static void main(String[] args) {
         System.out.print("Размер массива -> ");
         var arrayLength = new Scanner(System.in).nextInt();
-        int[] array = new int[arrayLength];
-        var counterNegative = 0;
+        var array = new ArrayList<Integer>();
         for (int i = 0; i < arrayLength; i++) {
-            array[i] = new Random().nextInt(201) - 100;
-            counterNegative = array[i] < 0 ? counterNegative++ : counterNegative;
+            array.add(new Random().nextInt(201) - 100);
         }
-        System.out.println(Arrays.toString(array));
+        System.out.println(array);
 
-        var result = 1;
-        var multi = 0;
-        for (int i = 0; i < arrayLength; i++) {
-            for (int j = 0; j < arrayLength; j++) {
-                for (int k = 0; k < arrayLength; k++) {
-                    if (k != i && i != j && k != j) {
-                        multi = array[i] * array[j] * array[k];
-                        result = Math.max(multi, result);
-                    }
+        array.sort(new Task4Comparator());
+        System.out.println(array);
 
-                }
-            }
-        }
-//        for (int i = 0; i < 3; i++) {
-//            var max = 0;
-//            var position = 0;
-//            var positionMin = 0;
-//            var min = 0;
-//
-//            if (counterNegative > 1)
-//                for (int j = 0; j < arrayLength; j++) {
-//                    if (array[j] < min) {
-//                        min = array[j];
-//                        positionMin = j;
-//                    }
-//                }
-//            array[positionMin] = 0;
-//
-//
-//
-//            position = 0;
+        var minusMinusPlus = array.get(0) * array.get(1) * array.getLast();
+        var plus = array.get(arrayLength - 2) * array.get(arrayLength - 3) * array.getLast();
+        var result = Math.max(minusMinusPlus, plus);
+        System.out.println(result);
+
+//        var multi = 0;
+//        for (int i = 0; i < arrayLength; i++) {
 //            for (int j = 0; j < arrayLength; j++) {
-//                if (array[j] > max) {
-//                    if (Math.abs(array[j]) > max) {
-//
+//                for (int k = 0; k < arrayLength; k++) {
+//                    if (k != i && i != j && k != j) {
+//                        multi = array[i] * array[j] * array[k];
+//                        result = Math.max(multi, result);
 //                    }
-//                    max = array[j];
-//                    position = j;
+//
 //                }
 //            }
-//            result *= max;
-//            array[position] = 0;
 //        }
 
-        System.out.println(result);
+    }
+
+    static class Task4Comparator implements Comparator<Integer> {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o1.compareTo(o2);
+        }
     }
 }
