@@ -4,20 +4,12 @@ public class Task5 {
     public static void main(String[] args) {
         System.out.print("Факториал -> ");
         var valueFactorial = new Scanner(System.in).nextLong();
-        var result = factorial(valueFactorial);
-        var counter = 0;
-        while (result % 10 == 0) {
-            result /= 10;
-            counter++;
-        }
-        System.out.println("Количество нулей на конце -> " + counter);
-    }
+        var result = 0;
 
-    public static long factorial(long value) {
-        if (value == 1) {
-            return 1;
-        } else {
-            return value * factorial(value - 1);
+        for (int i = 1; valueFactorial >= (int) Math.pow(5, i); i++) {
+            result += (int) (valueFactorial / (int) Math.pow(5, i));
         }
+
+        System.out.println("Количество нулей на конце -> " + result);
     }
 }
